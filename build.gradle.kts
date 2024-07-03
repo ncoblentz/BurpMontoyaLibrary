@@ -5,11 +5,12 @@ plugins {
 }
 
 group = "com.nickcoblentz.montoya"
-version = "0.1.4"
+version = "0.1.8"
 
 repositories {
     mavenLocal()
     mavenCentral()
+    maven(url="https://jitpack.io")
 }
 
 dependencies {
@@ -18,6 +19,7 @@ dependencies {
     implementation("net.portswigger.burp.extensions:montoya-api:2023.12.1")
     //implementation("org.httprpc:sierra:2.2")
     //implementation("com.google.code.gson:gson:2.11.0")
+    implementation("com.github.milchreis:uibooster:1.21.1")
 
 
     //implementation("org.json:json:+")

@@ -5,12 +5,8 @@ import burp.api.montoya.MontoyaApi;
 import com.nickcoblentz.montoya.MontoyaLogger;
 import org.httprpc.sierra.ScrollingKeyboardFocusManager;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class SettingsTest  implements BurpExtension {
     private MontoyaApi Api;

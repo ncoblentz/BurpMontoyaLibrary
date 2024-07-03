@@ -3,10 +3,10 @@ package com.nickcoblentz.montoya;
 import burp.api.montoya.MontoyaApi;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MontoyaLogger {
 
@@ -65,14 +65,38 @@ public class MontoyaLogger {
         return _LogLevel;
     }
 
+    public String getClassAndMethodName()
+    {
+        StackWalker walker = StackWalker.getInstance();
+        AtomicReference<String> className= new AtomicReference<>("");
+        AtomicReference<String> methodName= new AtomicReference<>("");
+        StackWalker.StackFrame sf = walker.walk((s) ->{
+            return s.skip(3).findFirst().get();
+        });
+        className.set(sf.getClassName());
+        methodName.set(sf.getMethodName());
+        return className.get()+"::"+methodName.get();
+    }
+    public void debugLog(String message)
+    {
+        log(DebugLogLevel,message);
+    }
     public void debugLog(String className, String message)
     {
         log(DebugLogLevel,className, message);
     }
 
+    public void warnLog(String message)
+    {
+        log(WarnLogLevel,message);
+    }
     public void warnLog(String className, String message)
     {
         log(WarnLogLevel,className,message);
+    }
+    public void errorLog(String message)
+    {
+        log(ErrorLogLevel,message);
     }
 
     public void errorLog(String className, String message)
@@ -80,6 +104,10 @@ public class MontoyaLogger {
         log(ErrorLogLevel,className,message);
     }
 
+    public void log(String logLevel,String message)
+    {
+        log(logLevel,getClassAndMethodName(),message);
+    }
     public void log(String logLevel, String className, String message)
     {
         if(!shouldLog(logLevel))
