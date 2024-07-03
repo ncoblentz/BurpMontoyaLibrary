@@ -2,6 +2,8 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.github.ben-manes.versions") version "0.51.0" //Gradle -> Help -> dependencyUpdates
+    id("org.owasp.dependencycheck") version "10.0.1" // owasp dependency-check -> dependencyCheckAnalyze
 }
 
 group = "com.nickcoblentz.montoya"
@@ -29,7 +31,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = group.toString()
-            artifactId = rootProject.name.toString()
+            artifactId = rootProject.name
             version = version.toString()
 
             from(components["java"])

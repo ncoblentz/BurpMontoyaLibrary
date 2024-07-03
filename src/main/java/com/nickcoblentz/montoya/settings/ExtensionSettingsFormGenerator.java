@@ -24,49 +24,32 @@ public class ExtensionSettingsFormGenerator {
                 form.getById("Change").setValue("Settings have not yet been saved!");
             });
 
-        ExtensionSettings.forEach((s) -> {
-            SettingsFormBuilder
-                    .startRow()
-                    .addText(s.getName(),s.getCurrentValue()).setID(s.getStorageKey())
-                    /*.addButton("\u27F3", new ButtonClickListener() {
-                        @Override
-                        public void onClick(FormElement formElement, Form form) {
-                            form.getById(s.getStorageKey()).setValue(s.reset());
-                        }
-                    }).setMargin(25,0,0,0)*/
-                    .endRow();
-                });
+        ExtensionSettings.forEach((s) -> SettingsFormBuilder
+                .startRow()
+                .addText(s.getName(),s.getCurrentValue()).setID(s.getStorageKey())
+                /*.addButton("\u27F3", new ButtonClickListener() {
+                    @Override
+                    public void onClick(FormElement formElement, Form form) {
+                        form.getById(s.getStorageKey()).setValue(s.reset());
+                    }
+                }).setMargin(25,0,0,0)*/
+                .endRow());
 
             SettingsFormBuilder
                 .startRow().addLabel(" ").setID("Change").setMargin(0,15,0,5).endRow()
                 .startRow()
-                .addButton("Reset", new ButtonClickListener() {
-                    @Override
-                    public void onClick(FormElement formElement, Form form) {
-                        ExtensionSettings.forEach((item) ->{
-                            form.getById(item.getStorageKey()).setValue(item.reset());
-                        });
-                    }
+                .addButton("Reset", (formElement, form) -> ExtensionSettings.forEach((item) -> form.getById(item.getStorageKey()).setValue(item.reset())))
+                .addButton("Save", (formElement, form) -> {
+                    ExtensionSettings.forEach((item) ->{
+                        if(form.getById(item.getStorageKey()).getValue() instanceof String sValue)
+                        {
+                            item.setCurrentValue(sValue);
+                            item.save();
+                        }
+                    });
+                    form.getById("Change").setValue(" ");
                 })
-                .addButton("Save", new ButtonClickListener() {
-                    @Override
-                    public void onClick(FormElement formElement, Form form) {
-                        ExtensionSettings.forEach((item) ->{
-                            if(form.getById(item.getStorageKey()).getValue() instanceof String sValue)
-                            {
-                                item.setCurrentValue(sValue);
-                                item.save();
-                            }
-                        });
-                        form.getById("Change").setValue(" ");
-                    }
-                })
-                .addButton("Close", new ButtonClickListener() {
-                    @Override
-                    public void onClick(FormElement formElement, Form form) {
-                        form.close();
-                    }
-                })
+                .addButton("Close", (formElement, form) -> form.close())
             .endRow();
     }
 

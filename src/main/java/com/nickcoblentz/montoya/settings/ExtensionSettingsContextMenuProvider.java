@@ -16,10 +16,10 @@ import java.util.List;
 
 public class ExtensionSettingsContextMenuProvider implements ContextMenuItemsProvider, ActionListener {
 
-    private MontoyaApi Api;
-    private MontoyaLogger Logger;
-    private Form SettingsForm;
-    private JMenuItem SettingsMenuItem = new JMenuItem("Settings");
+    private final MontoyaApi Api;
+    private final MontoyaLogger Logger;
+    private final Form SettingsForm;
+    private final JMenuItem SettingsMenuItem = new JMenuItem("Settings");
 
     public ExtensionSettingsContextMenuProvider(MontoyaApi api, Form settingsForm) {
         Api = api;

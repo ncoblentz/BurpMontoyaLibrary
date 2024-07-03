@@ -9,7 +9,7 @@ public class ExtensionSetting implements IExtensionSetting {
     private final String Name;
     private final MontoyaApi Api;
     private final ExtensionSettingSaveLocation DefaultSaveLocation;
-    private MontoyaLogger Logger;
+    private final MontoyaLogger Logger;
     private String CurrentValue;
 
 
