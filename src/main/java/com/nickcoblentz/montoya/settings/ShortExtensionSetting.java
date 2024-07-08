@@ -27,4 +27,14 @@ public class ShortExtensionSetting extends GenericExtensionSetting<Short> {
         if(value!=null)
             setCurrentValue(parseString(value));
     }
+
+    @Override
+    public void saveToProject() {
+        getApi().persistence().extensionData().setShort(getStorageKey(),getCurrentValue().shortValue());
+    }
+
+    @Override
+    public void saveToPreferences() {
+        getApi().persistence().preferences().setShort(getStorageKey(),getCurrentValue().shortValue());
+    }
 }

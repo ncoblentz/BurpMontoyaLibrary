@@ -19,6 +19,17 @@ public class BooleanExtensionSetting extends GenericExtensionSetting<Boolean> {
     }
 
     @Override
+    public void saveToProject() {
+        getApi().persistence().extensionData().setBoolean(getStorageKey(),getCurrentValue().booleanValue());
+
+    }
+
+    @Override
+    public void saveToPreferences() {
+        getApi().persistence().preferences().setBoolean(getStorageKey(),getCurrentValue().booleanValue());
+    }
+
+    @Override
     public Boolean parseString(String value) {
         return Boolean.valueOf(value);
     }

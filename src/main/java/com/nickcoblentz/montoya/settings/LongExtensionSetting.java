@@ -27,4 +27,14 @@ public class LongExtensionSetting extends GenericExtensionSetting<Long> {
         if(value!=null)
             setCurrentValue(parseString(value));
     }
+
+    @Override
+    public void saveToProject() {
+        getApi().persistence().extensionData().setLong(getStorageKey(),getCurrentValue().longValue());
+    }
+
+    @Override
+    public void saveToPreferences() {
+        getApi().persistence().preferences().setLong(getStorageKey(),getCurrentValue().longValue());
+    }
 }

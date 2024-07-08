@@ -33,8 +33,6 @@ Fsrc/main/java/com/nickcoblentz/montoya/settings/IExtensionSetting.java,b\c\bc9
 Qsrc/main/java/com/nickcoblentz/montoya/settings/ExtensionSettingSaveLocation.java,3\6\36a22a8a858353aef5bf0505a16153706fb1d189
 |
 Lsrc/main/java/com/nickcoblentz/montoya/settings/GenericExtensionSetting.java,e\f\ef785a478650da7c7145eb064a2e008ff96e92e2
-}
-Msrc/main/java/com/nickcoblentz/montoya/settings/IGenericExtensionSetting.java,7\b\7b7310b537605c66a0df75a34ecfc5a27f4beb72
 |
 Lsrc/main/java/com/nickcoblentz/montoya/settings/IntegerExtensionSetting.java,b\1\b13cdd6d0ddf502223a8c7152ce5cb4a2ac775cc
 {
@@ -49,3 +47,7 @@ y
 Isrc/main/java/com/nickcoblentz/montoya/settings/ByteExtensionSetting.java,5\f\5f21c58c5a3c6c1cb17d18d4e9155e5a57705502
 Š
 Zsrc/main/java/com/nickcoblentz/montoya/settings/GenericExtensionSettingsFormGenerator.java,1\0\10009fdd486fe1ce53ff373599cfdff1d4fffd02
+
+Osrc/main/java/com/nickcoblentz/montoya/settings/ListStringExtensionSetting.java,2\7\27563cde1e7980982ab4104e1f44960fc41dc240
+€
+Psrc/main/java/com/nickcoblentz/montoya/settings/MultiSelectExtensionSetting.java,8\0\80f825be7e362a60dc03237c07fa262f23e5dded

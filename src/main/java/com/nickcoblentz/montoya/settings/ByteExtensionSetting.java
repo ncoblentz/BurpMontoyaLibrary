@@ -24,6 +24,16 @@ public class ByteExtensionSetting extends GenericExtensionSetting<Byte> {
     }
 
     @Override
+    public void saveToProject() {
+        getApi().persistence().extensionData().setByte(getStorageKey(),getCurrentValue().byteValue());
+    }
+
+    @Override
+    public void saveToPreferences() {
+        getApi().persistence().preferences().setByte(getStorageKey(),getCurrentValue().byteValue());
+    }
+
+    @Override
     public Byte parseString(String value) {
         return Byte.valueOf(value);
     }

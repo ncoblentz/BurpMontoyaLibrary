@@ -22,4 +22,14 @@ public class StringExtensionSetting extends GenericExtensionSetting<String> {
     public String parseString(String value) {
         return value;
     }
+
+    @Override
+    public void saveToProject() {
+        getApi().persistence().extensionData().setString(getStorageKey(),getCurrentValue());
+    }
+
+    @Override
+    public void saveToPreferences() {
+        getApi().persistence().preferences().setString(getStorageKey(),getCurrentValue());
+    }
 }

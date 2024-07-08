@@ -28,4 +28,14 @@ public class IntegerExtensionSetting extends GenericExtensionSetting<Integer> {
         if(value!=null)
             setCurrentValue(parseString(value));
     }
+
+    @Override
+    public void saveToProject() {
+        getApi().persistence().extensionData().setInteger(getStorageKey(),getCurrentValue().intValue());
+    }
+
+    @Override
+    public void saveToPreferences() {
+        getApi().persistence().preferences().setInteger(getStorageKey(),getCurrentValue().intValue());
+    }
 }
