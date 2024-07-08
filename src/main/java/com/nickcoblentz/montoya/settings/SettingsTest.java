@@ -17,10 +17,18 @@ public class SettingsTest  implements BurpExtension {
         Api=api;
         api.extension().setName(PluginName);
         MontoyaLogger logger = new MontoyaLogger(api,MontoyaLogger.DebugLogLevel);
-        ExtensionSetting testSetting1 = new ExtensionSetting(api,"Test1","montoyalibrary.test1","the value here!", ExtensionSettingSaveLocation.PROJECT);
-        ExtensionSetting testSetting2 = new ExtensionSetting(api,"Test2","montoyalibrary.test2","another value here!", ExtensionSettingSaveLocation.PREFERENCE);
-        List<IExtensionSetting> extensionSetting = List.of(testSetting1,testSetting2);
-        ExtensionSettingsFormGenerator gen = new ExtensionSettingsFormGenerator(extensionSetting,PluginName);
+        //ExtensionSetting testSetting1 = new ExtensionSetting(api,"Test1","montoyalibrary.test1","the value here!", ExtensionSettingSaveLocation.PROJECT);
+        //ExtensionSetting testSetting2 = new ExtensionSetting(api,"Test2","montoyalibrary.test2","another value here!", ExtensionSettingSaveLocation.PREFERENCE);
+        StringExtensionSetting testSetting1 = new StringExtensionSetting(api,"String Test1","montoyalibrary.test1","the value here!", ExtensionSettingSaveLocation.PROJECT);
+        StringExtensionSetting testSetting2 = new StringExtensionSetting(api,"String Test2","montoyalibrary.test2","another value here!", ExtensionSettingSaveLocation.PREFERENCE);
+        ByteExtensionSetting testSetting3 = new ByteExtensionSetting(api,"Byte Test","montoyalibrary.test3",Byte.valueOf((byte)36), ExtensionSettingSaveLocation.PREFERENCE);
+        BooleanExtensionSetting testSetting4 = new BooleanExtensionSetting(api,"Boolean Test","montoyalibrary.test4",Boolean.valueOf(true),ExtensionSettingSaveLocation.PROJECT);
+        IntegerExtensionSetting testSetting5 = new IntegerExtensionSetting(api,"Integer Test","montoyalibrary.test5",Integer.valueOf(3),ExtensionSettingSaveLocation.PROJECT);
+        LongExtensionSetting testSetting6 = new LongExtensionSetting(api,"Long Test","montoyalibrary.test6",Long.valueOf("9223372036854775807"),ExtensionSettingSaveLocation.PROJECT);
+        ShortExtensionSetting testSetting7 = new ShortExtensionSetting(api,"Short Test","montoyalibrary.test7",Short.valueOf((short)123),ExtensionSettingSaveLocation.PROJECT);
+
+        List<GenericExtensionSetting> extensionSetting = List.of(testSetting1,testSetting2,testSetting3,testSetting4,testSetting5,testSetting6,testSetting7);
+        GenericExtensionSettingsFormGenerator gen = new GenericExtensionSettingsFormGenerator(extensionSetting,PluginName);
         FormBuilder settingsFormBuilder = gen.getSettingsFormBuilder();
         Form settingsForm = settingsFormBuilder.run();
 
