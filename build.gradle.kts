@@ -4,10 +4,11 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.github.ben-manes.versions") version "0.51.0" //Gradle -> Help -> dependencyUpdates
     id("org.owasp.dependencycheck") version "10.0.1" // owasp dependency-check -> dependencyCheckAnalyze
+    kotlin("jvm")
 }
 
 group = "com.nickcoblentz.montoya"
-version = "0.1.10"
+version = "0.1.12"
 
 repositories {
     mavenLocal()
@@ -25,6 +26,7 @@ dependencies {
 
 
     //implementation("org.json:json:+")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 publishing {
@@ -41,4 +43,7 @@ publishing {
 
 tasks.test {
     useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(21)
 }

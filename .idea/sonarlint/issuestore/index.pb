@@ -49,5 +49,5 @@ Isrc/main/java/com/nickcoblentz/montoya/settings/ByteExtensionSetting.java,5\f\
 Zsrc/main/java/com/nickcoblentz/montoya/settings/GenericExtensionSettingsFormGenerator.java,1\0\10009fdd486fe1ce53ff373599cfdff1d4fffd02
 
 Osrc/main/java/com/nickcoblentz/montoya/settings/ListStringExtensionSetting.java,2\7\27563cde1e7980982ab4104e1f44960fc41dc240
-€
-Psrc/main/java/com/nickcoblentz/montoya/settings/MultiSelectExtensionSetting.java,8\0\80f825be7e362a60dc03237c07fa262f23e5dded
+e
+5src/main/java/com/nickcoblentz/montoya/Annotations.kt,5\3\53c86a84ab5f217ae078fc9454c7f7a95844ea4e
