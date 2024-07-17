@@ -1,8 +1,8 @@
-# VirtueMontoyaLibrary
+# MontoyaLibrary
 
 _By [Nick Coblentz](https://www.linkedin.com/in/ncoblentz/)_
 
-__This Burp Montoya Library is made possible by [Virtue Security](https://www.virtuesecurity.com), the Application Penetration Testing consulting company I work for.__
+__The Montoya Library is made possible by [Virtue Security](https://www.virtuesecurity.com), the Application Penetration Testing consulting company I work for.__
 
 ## About
 
