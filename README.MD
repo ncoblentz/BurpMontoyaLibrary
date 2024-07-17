@@ -6,7 +6,7 @@ __The Montoya Library is made possible by [Virtue Security](https://www.virtuese
 
 ## About
 
-The __Virtue Montoya Library__ provides convenient features to help make building Burp Suite plugins a joy.
+The __Montoya Library__ provides convenient features to help make building Burp Suite plugins a joy.
 
 ## How to Use It
 
