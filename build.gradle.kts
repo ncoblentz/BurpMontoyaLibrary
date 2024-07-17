@@ -3,8 +3,7 @@ plugins {
     id("maven-publish")
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("com.github.ben-manes.versions") version "0.51.0" //Gradle -> Help -> dependencyUpdates
-    id("org.owasp.dependencycheck") version "10.0.1" // owasp dependency-check -> dependencyCheckAnalyze
-    kotlin("jvm")
+    kotlin("jvm") version "2.0.0"
 }
 
 group = "com.nickcoblentz.montoya"
@@ -13,7 +12,12 @@ version = "0.1.12"
 repositories {
     mavenLocal()
     mavenCentral()
-    maven(url="https://jitpack.io")
+    maven(url="https://jitpack.io") {
+        content {
+            includeGroup("com.github.milchreis")
+            includeGroup("com.github.ncoblentz")
+        }
+    }
 }
 
 dependencies {
