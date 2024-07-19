@@ -51,11 +51,9 @@ Zsrc/main/java/com/nickcoblentz/montoya/settings/GenericExtensionSettingsFormGen
 Osrc/main/java/com/nickcoblentz/montoya/settings/ListStringExtensionSetting.java,2\7\27563cde1e7980982ab4104e1f44960fc41dc240
 e
 5src/main/java/com/nickcoblentz/montoya/Annotations.kt,5\3\53c86a84ab5f217ae078fc9454c7f7a95844ea4e
-j
-:src/main/java/com/nickcoblentz/montoya/ui/MontoyaLogger.kt,8\a\8abc135e4fe71c1792c42ecdc57b671183584c9e
-g
-7src/main/java/com/nickcoblentz/montoya/MontoyaLogger.kt,2\8\2829ace1bbb05258ffdc5e0a726b0304fee914a9
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 9
 	README.MD,9\6\968e80af9562e09cebe594968b130076952eafe1
+g
+7src/main/java/com/nickcoblentz/montoya/MontoyaLogger.kt,2\8\2829ace1bbb05258ffdc5e0a726b0304fee914a9

@@ -1,6 +1,7 @@
 package com.nickcoblentz.montoya.settings;
 
 import burp.api.montoya.MontoyaApi;
+import com.nickcoblentz.montoya.LogLevel;
 import com.nickcoblentz.montoya.MontoyaLogger;
 
 import java.util.List;
@@ -17,7 +18,8 @@ public abstract class GenericExtensionSetting<T> {
     private T CurrentValue;
 
     public GenericExtensionSetting(MontoyaApi api, String name, String storageKey, T defaultValue, ExtensionSettingSaveLocation defaultSaveLocation) {
-        Logger = new MontoyaLogger(api,MontoyaLogger.DebugLogLevel);
+        //Logger = new MontoyaLogger(api,MontoyaLogger.DebugLogLevel);
+        Logger = new MontoyaLogger(api, LogLevel.DEBUG);
         Api=api;
         Name=name;
         StorageKey=storageKey;

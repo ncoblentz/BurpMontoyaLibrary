@@ -5,6 +5,7 @@ import burp.api.montoya.ui.contextmenu.AuditIssueContextMenuEvent;
 import burp.api.montoya.ui.contextmenu.ContextMenuEvent;
 import burp.api.montoya.ui.contextmenu.ContextMenuItemsProvider;
 import burp.api.montoya.ui.contextmenu.WebSocketContextMenuEvent;
+import com.nickcoblentz.montoya.LogLevel;
 import com.nickcoblentz.montoya.MontoyaLogger;
 import de.milchreis.uibooster.model.Form;
 
@@ -24,7 +25,8 @@ public class ExtensionSettingsContextMenuProvider implements ContextMenuItemsPro
     public ExtensionSettingsContextMenuProvider(MontoyaApi api, Form settingsForm) {
         Api = api;
         SettingsForm = settingsForm;
-        Logger = new MontoyaLogger(api, MontoyaLogger.DebugLogLevel);
+        //Logger = new MontoyaLogger(api, MontoyaLogger.DebugLogLevel);
+        Logger = new MontoyaLogger(api, LogLevel.DEBUG);
         SettingsMenuItem.addActionListener(this);
     }
 

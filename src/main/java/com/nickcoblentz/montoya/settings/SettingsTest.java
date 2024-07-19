@@ -3,6 +3,7 @@ package com.nickcoblentz.montoya.settings;
 import burp.api.montoya.BurpExtension;
 import burp.api.montoya.MontoyaApi;
 import burp.api.montoya.persistence.PersistedList;
+import com.nickcoblentz.montoya.LogLevel;
 import com.nickcoblentz.montoya.MontoyaLogger;
 import de.milchreis.uibooster.model.Form;
 import de.milchreis.uibooster.model.FormBuilder;
@@ -16,7 +17,8 @@ public class SettingsTest  implements BurpExtension {
     @Override
     public void initialize(MontoyaApi api) {
         Api=api;
-        MontoyaLogger logger = new MontoyaLogger(api,MontoyaLogger.DebugLogLevel);
+        //MontoyaLogger logger = new MontoyaLogger(api,MontoyaLogger.DebugLogLevel);
+        MontoyaLogger logger = new MontoyaLogger(api, LogLevel.DEBUG);
         logger.debugLog("Loading Plugin");
         api.extension().setName(PluginName);
         //ExtensionSetting testSetting1 = new ExtensionSetting(api,"Test1","montoyalibrary.test1","the value here!", ExtensionSettingSaveLocation.PROJECT);
