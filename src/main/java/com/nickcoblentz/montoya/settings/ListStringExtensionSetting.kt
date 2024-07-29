@@ -29,8 +29,8 @@ class ListStringExtensionSetting(
         api.persistence().preferences().setString(storageKey, joinListAsString(currentValue))
     }
 
-    fun parseStringAsList(values: String): List<String> {
-        if (values.isNotEmpty()) {
+    fun parseStringAsList(values: String?): List<String> {
+        if (values!=null && values.isNotEmpty()) {
             return values.split("\n")
         }
         return emptyList()

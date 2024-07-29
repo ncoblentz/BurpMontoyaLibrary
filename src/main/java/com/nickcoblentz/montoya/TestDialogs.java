@@ -1,14 +1,16 @@
 package com.nickcoblentz.montoya;
 
 
+import com.nickcoblentz.montoya.ui.UIHelper;
 import de.milchreis.uibooster.UiBooster;
+import java.io.File;
 
 import java.util.concurrent.atomic.AtomicReference;
 
 public class TestDialogs {
     public static void main(String[] args)
     {
-        UiBooster booster = new UiBooster();
+        /*UiBooster booster = new UiBooster();
 
         AtomicReference<String> opinion= new AtomicReference<>("");
         Thread t = Thread.ofVirtual().start(() -> {
@@ -27,6 +29,10 @@ public class TestDialogs {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        */
+
+
+        File[] result = (new UIHelper()).showFileMultiSelectionDialog();
 
 
 
