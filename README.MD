@@ -59,7 +59,8 @@ class MontoyaKotlinSessionAccessTokenHelper : BurpExtension {
 
 ### Burp Project and Preference Level Persistence and UI Supporting it
 
-This library can be built (`gradlew shadowJar`) and then added as an extension in Burp Suite. It will execute the following plugin: https://github.com/ncoblentz/BurpMontoyaLibrary/blob/master/src/main/java/com/nickcoblentz/montoya/settings/SettingsTest.java. That plugin demonstrates how to create Persistence Settings that are automatically supported by a User Interface. That user interface will be displayed when initially loading the plugin. It will also show by right-clicking an HTTP request and selecting Extensions &gt; Test Settings &gt; Settings. Another example of an extension using this library may be found at: https://github.com/ncoblentz/MontoyaKotlinSessionAccessTokenHelper
+This library can be built (`gradlew shadowJar`) and then added as an extension in Burp Suite. It will execute the following plugin: https://github.com/ncoblentz/BurpMontoyaLibrary/blob/master/src/main/java/com/nickcoblentz/montoya/settings/SettingsTest.java. That plugin demonstrates how to create Persistence Settings that are automatically supported by a User Interface. That user interface will be displayed when initially loading the plugin. It will also show by right-clicking an HTTP request and selecting Extensions &gt; Test Settings &gt; Settings. Another example of an extension using this library may be found at: https://github.com/ncoblentz/MontoyaKotlinSessionAccessTokenHelper 
+> Note: if you wish to use this library directly as an extension in Burp Suite (to try it out), uncommen the code here first: https://github.com/ncoblentz/MontoyaKotlinSessionAccessTokenHelper. If you are simply using the library within your own extension, you do not need to take any action.
 
 All Settings support either Project or Preference level persistence. The following settings types are supported:
 - `Boolean`
@@ -128,5 +129,41 @@ override fun handleRequestToBeSent(interceptedRequest: InterceptedRequest?): Pro
     interceptedRequest?.annotations().appendNotes("Some Note here")
     //finish processing
     return ProxyRequestToBeSentAction.continueWith(interceptedRequest)
+}
+```
+
+
+### HttpRequest
+#### Update Content Length Header and Send With Updated Content Length Header
+
+There are the following new methods that update the "Content-Length" header. One method is a standalone update. The others send the request, but before sending it, it updates the header.
+
+```kotlin
+//example 1
+httpRequest.withUpdatedContentLength() //update the content length header if already present
+//example 2
+httpRequest.withUpdatedContentLength(true) //add a content length header if not present
+//example 3
+api.http().sendRequestWithUpdatedContentLength(httpRequest,RequestOptions.requestOptions().withRedirectionMode(RedirectionMode.ALWAYS))
+//example 4
+api.http().sendRequestWithUpdatedContentLength(httpRequest)
+```
+
+#### Update a ParsedHttpParameter - useful for not GET/POST/Cookie/Header Values (JSON, XML, etc...)
+
+Supported Insertion Modes:
+```kotlin
+enum class PayloadUpdateMode {
+    REPLACE,
+    PREPEND,
+    INSERT_MIDDLE,
+    APPEND
+}
+```
+Example usage
+```kotlin
+for (parameter in currentRequest.parameters()) {
+    if(parameter.type()== HttpParameterType.JSON)
+        val modifiedRequest = currentRequest.withUpdatedParsedParameterValue(parameter, "", PayloadUpdateMode.REPLACE)
 }
 ```

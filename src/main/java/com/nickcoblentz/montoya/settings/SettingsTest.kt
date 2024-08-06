@@ -1,3 +1,4 @@
+/*
 package com.nickcoblentz.montoya.settings
 
 import burp.api.montoya.BurpExtension
@@ -89,4 +90,4 @@ class SettingsTest : BurpExtension {
         api.userInterface().registerContextMenuItemsProvider(ExtensionSettingsContextMenuProvider(api, settingsForm))
         logger.debugLog("Finished")
     }
-}
+}*/

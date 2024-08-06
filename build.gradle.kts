@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.nickcoblentz.montoya"
-version = "0.1.15"
+version = "0.1.20"
 
 repositories {
     mavenLocal()
@@ -23,7 +23,7 @@ repositories {
 dependencies {
     //testImplementation(platform("org.junit:junit-bom:5.10.0"))
     //testImplementation("org.junit.jupiter:junit-jupiter")
-    implementation("net.portswigger.burp.extensions:montoya-api:2023.12.1")
+    implementation("net.portswigger.burp.extensions:montoya-api:2024.7")
     //implementation("org.httprpc:sierra:2.2")
     //implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.github.milchreis:uibooster:1.21.1")
