@@ -1,10 +1,6 @@
-pluginManagement {
-    plugins {
-        kotlin("jvm") version "2.0.0"
-    }
-}
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+    // https://plugins.gradle.org/plugin/org.gradle.toolchains.foojay-resolver-convention
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
-rootProject.name = "MontoyaLibrary"
 
+rootProject.name = "MontoyaLibrary"

@@ -2,7 +2,8 @@ package com.nickcoblentz.montoya
 
 import burp.api.montoya.http.message.params.ParsedHttpParameter
 import burp.api.montoya.http.message.requests.HttpRequest
-
+import burp.api.montoya.http.message.params.HttpParameter
+import burp.api.montoya.http.message.params.HttpParameterType
 
 public fun HttpRequest.withUpdatedContentLength(addContentLengthHeaderIfNotPresent : Boolean = false) : HttpRequest {
     if(this.hasHeader("Content-Length"))
@@ -66,4 +67,24 @@ public fun HttpRequest.withUpdatedParsedParameterValue(parsedParameter : ParsedH
         }
     }
     return this
+}
+
+// This method patches the https://portswigger.github.io/burp-extensions-montoya-api/javadoc/burp/api/montoya/http/message/requests/HttpRequest.html interface to include a new "addOrUpdateHeader(header,value)" method.
+public fun HttpRequest.withAddedOrUpdatedHeader(headerName : String, headerValue : String) : HttpRequest {
+
+    return if(this.hasHeader(headerName))
+        this.withUpdatedHeader(headerName, headerValue)
+    else
+        this.withAddedHeader(headerName, headerValue)
+}
+
+// This method patches the https://portswigger.github.io/burp-extensions-montoya-api/javadoc/burp/api/montoya/http/message/requests/HttpRequest.html interface to include a new "addOrUpdateCookie(cookie,value)" method.
+public fun HttpRequest.withAddedOrUpdatedCookie(cookieName : String, cookieValue : String) : HttpRequest {
+
+    return if(this.hasParameter("token",HttpParameterType.COOKIE)) {
+        this.withUpdatedParameters(HttpParameter.cookieParameter(cookieName,cookieValue))
+    }
+    else {
+        this.withAddedParameters(HttpParameter.cookieParameter(cookieName,cookieValue))
+    }
 }

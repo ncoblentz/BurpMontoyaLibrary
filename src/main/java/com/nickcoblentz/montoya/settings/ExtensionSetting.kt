@@ -8,10 +8,10 @@ class ExtensionSetting(private val api: MontoyaApi, override val name: String,ov
 
     override var currentValue: String = defaultValue
         get() {
-            return if (field == null || field.isEmpty()) defaultValue else field
+            return if (field.isEmpty()) defaultValue else field
         }
         set(value) {
-            if (value != null) field = value
+            field = value
         }
 
     init {
