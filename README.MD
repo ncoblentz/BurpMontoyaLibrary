@@ -167,3 +167,15 @@ for (parameter in currentRequest.parameters()) {
         val modifiedRequest = currentRequest.withUpdatedParsedParameterValue(parameter, "", PayloadUpdateMode.REPLACE)
 }
 ```
+
+#### Update or Add a Header - Useful for not worring about if the header already exists
+
+```kotlin
+modifiedRequest = modifiedRequest.addOrUpdateHeader("Authorization","Bearer $token")
+```
+
+#### Update or Add a Cookie - Useful for not worring about if the header already exists
+
+```kotlin
+modifiedRequest = modifiedRequest.addOrUpdateCookie("token",token)
+```
