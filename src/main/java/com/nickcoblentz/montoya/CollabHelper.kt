@@ -5,6 +5,7 @@ import burp.api.montoya.collaborator.CollaboratorClient
 import burp.api.montoya.collaborator.Interaction
 import burp.api.montoya.collaborator.InteractionType
 import burp.api.montoya.collaborator.SecretKey
+import burp.api.montoya.extension.ExtensionUnloadingHandler
 import burp.api.montoya.scanner.audit.issues.AuditIssue
 import burp.api.montoya.scanner.audit.issues.AuditIssueConfidence
 import burp.api.montoya.scanner.audit.issues.AuditIssueSeverity
@@ -21,9 +22,9 @@ class CollabHelper(private val api : MontoyaApi) {
     private var shouldPollForInteactions = true
     private var pollCollabThread : Thread? = null
 
-    private lateinit var collabPayloadsSetting : StringExtensionSetting
-    private lateinit var collabSecretSetting: StringExtensionSetting
 
+    public lateinit var collabPayloadsSetting : StringExtensionSetting
+    public lateinit var collabSecretSetting: StringExtensionSetting
     public lateinit var extensionSettings : List<StringExtensionSetting>
     public var pollSeconds : Long = 5
     public var interactionObservers = mutableListOf<(Interaction) -> Unit>()
@@ -78,6 +79,12 @@ class CollabHelper(private val api : MontoyaApi) {
             collabPayloadsSetting.save()
         }
 
+        api.extension().registerUnloadingHandler(ExtensionUnloadingHandler {
+            api.logging().logToOutput("Shutting down virtual thread")
+            shouldPollForInteactions=false
+            pollCollabThread?.join()
+        })
+
         pollCollabThread = Thread.ofVirtual().name("Poll Collaborator").start {
 
             val threadId = UUID.randomUUID().toString()
@@ -86,8 +93,6 @@ class CollabHelper(private val api : MontoyaApi) {
                 api.logging().logToOutput("In loop: $threadId")
                 val allInteractions = collaboratorClient.allInteractions
                 api.logging().logToOutput("${allInteractions.size} Total interactions")
-
-                //val pattern = Pattern.compile(collabFlagItemRegex.currentValue)
 
                 for(interaction in allInteractions) {
                     api.logging().logToOutput("${interaction.timeStamp()} ${interaction.type()} ${interaction.clientIp()} ${interaction.clientPort()}")
@@ -107,5 +112,6 @@ class CollabHelper(private val api : MontoyaApi) {
         shouldPollForInteactions=false
         pollCollabThread?.join()
     }
+
 
 }
