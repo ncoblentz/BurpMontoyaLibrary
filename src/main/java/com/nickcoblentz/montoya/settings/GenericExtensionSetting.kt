@@ -9,7 +9,8 @@ abstract class GenericExtensionSetting<T>(
     val name: String,
     val storageKey: String,
     val defaultValue: T,
-    private val defaultSaveLocation: ExtensionSettingSaveLocation
+    private val defaultSaveLocation: ExtensionSettingSaveLocation,
+    val isReadOnly: Boolean = false
 ) {
 
 

@@ -57,13 +57,13 @@ class GenericExtensionSettingsFormGenerator(
             }
             else if(listStringExtensionSetting!=null ) {
                 settingsFormBuilder.startRow()
-                    .addTextArea(s.name, listStringExtensionSetting.getCurrentValueAsString())
+                    .addTextArea(s.name,10, listStringExtensionSetting.getCurrentValueAsString(), s.isReadOnly)
                     .setID(s.storageKey)
                     .endRow()
             }
             else {
                 settingsFormBuilder.startRow()
-                    .addText(s.name, s.currentValue.toString())
+                    .addText(s.name, s.currentValue.toString(), s.isReadOnly)
                     .setID(s.storageKey)
                     .endRow()
             }

@@ -7,11 +7,12 @@ class ListStringExtensionSetting(
     name: String,
     storageKey: String,
     defaultValue: List<String>,
-    defaultSaveLocation: ExtensionSettingSaveLocation
+    defaultSaveLocation: ExtensionSettingSaveLocation,
+    isReadOnly: Boolean = false
 ) :
     GenericExtensionSetting<List<String>>(
         api,
-        name, storageKey, defaultValue, defaultSaveLocation
+        name, storageKey, defaultValue, defaultSaveLocation, isReadOnly
     ) {
     override fun loadFromProject() {
         currentValue = parseStringAsList(api.persistence().extensionData().getString(storageKey))

@@ -7,9 +7,10 @@ class StringExtensionSetting(
     name: String,
     storageKey: String,
     defaultValue: String,
-    defaultSaveLocation: ExtensionSettingSaveLocation
+    defaultSaveLocation: ExtensionSettingSaveLocation,
+    isReadOnly: Boolean = false
 ) :
-    GenericExtensionSetting<String>(api, name!!, storageKey, defaultValue, defaultSaveLocation) {
+    GenericExtensionSetting<String>(api, name!!, storageKey, defaultValue, defaultSaveLocation, isReadOnly) {
     override fun loadFromProject() {
         currentValue = api.persistence().extensionData().getString(storageKey)
     }
