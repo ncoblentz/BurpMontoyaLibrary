@@ -182,7 +182,7 @@ modifiedRequest = modifiedRequest.addOrUpdateCookie("token",token)
 
 ### Collaborator
 
-#### Polling Helper
+#### Polling Helper and Interaction Filter
 
 This feature will create a collaborator payload and provide the address through the Settings UI widget (Right-Click -> Extensions -> Collab Helper -> Settings). It will then begin to poll for interactions every 5 seconds. You can pass a lambda to the class to be notified of any interactions and handle it. One example is found at: https://github.com/ncoblentz/KotlinBurpCollabHelper/blob/master/src/main/kotlin/KotlinBurpCollabHelper.kt
 
@@ -196,9 +196,18 @@ class KotlinBurpCollabHelper : BurpExtension {
 
         ...
 
+        // This creates or restores a CollaboratorClient and starts polling right away for interactions
         collabHelper = CollabHelper(api)
-        // Your function to receive notifications of interaction
-        collabHelper.interactionObservers.add(::handleInteraction)
+        
+        // Builder pattern for filtering the interactions for the type of events you want, and providing a callback to act upon those filtered interactions
+        val collabFilter = CollabHelperInteractionFilter()
+            .withInteractionType(InteractionType.HTTP)
+            .withHttpRequestPattern("myregexsearchvaluehere") // Consider using a setting that can be updated from the UI like in the example KotlinBurpCollabHelper.kt file
+            .withInteractionHandler(::handleInteraction)
+        
+        // Register the callback with collabHelper
+        collabHelper.interactionObservers.add(collabFilter::handleInteraction)
+        
         val extensionSetting = mutableListOf(.. your settings here ...)
         extensionSetting.addAll(collabHelper.extensionSettings)
         val gen = GenericExtensionSettingsFormGenerator(extensionSetting, PLUGIN_NAME)
@@ -218,17 +227,9 @@ class KotlinBurpCollabHelper : BurpExtension {
     ...
     
     private fun handleInteraction(interaction: Interaction) {
-        api.logging().logToOutput("Made it in here")
-        if (collabFlagItemRegex.currentValue.isNotBlank() &&
-            interaction.type() == InteractionType.HTTP &&
-            interaction.httpDetails().isPresent
-        ) {
-
-            val request = interaction.httpDetails().get().requestResponse().request()
-            // do something with the request here
-            }
-
-        }
+        api.logging().logToOutput("A match was found!")
+        // Only interactions matching the filter above will reach this point
+        // do something with the interaction here
     }
 }
 ```
