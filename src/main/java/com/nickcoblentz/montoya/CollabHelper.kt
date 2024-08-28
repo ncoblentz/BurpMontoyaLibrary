@@ -99,6 +99,7 @@ class CollabHelper(private val api : MontoyaApi) {
 
                     for(observer in interactionObservers) {
                         observer(interaction)
+
                     }
                 }
                 Thread.sleep(Duration.ofSeconds(pollSeconds))
@@ -112,6 +113,5 @@ class CollabHelper(private val api : MontoyaApi) {
         shouldPollForInteactions=false
         pollCollabThread?.join()
     }
-
-
 }
+
