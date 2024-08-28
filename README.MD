@@ -179,3 +179,56 @@ modifiedRequest = modifiedRequest.addOrUpdateHeader("Authorization","Bearer $tok
 ```kotlin
 modifiedRequest = modifiedRequest.addOrUpdateCookie("token",token)
 ```
+
+### Collaborator
+
+#### Polling Helper
+
+This feature will create a collaborator payload and provide the address through the Settings UI widget (Right-Click -> Extensions -> Collab Helper -> Settings). It will then begin to poll for interactions every 5 seconds. You can pass a lambda to the class to be notified of any interactions and handle it. One example is found at: https://github.com/ncoblentz/KotlinBurpCollabHelper/blob/master/src/main/kotlin/KotlinBurpCollabHelper.kt
+
+Example code:
+```kotlin
+class KotlinBurpCollabHelper : BurpExtension {
+    ...
+    private lateinit var collabHelper: CollabHelper
+    override fun initialize(api: MontoyaApi?) {
+        requireNotNull(api) { "api : MontoyaApi is not allowed to be null" }
+
+        ...
+
+        collabHelper = CollabHelper(api)
+        // Your function to receive notifications of interaction
+        collabHelper.interactionObservers.add(::handleInteraction)
+        val extensionSetting = mutableListOf(.. your settings here ...)
+        extensionSetting.addAll(collabHelper.extensionSettings)
+        val gen = GenericExtensionSettingsFormGenerator(extensionSetting, PLUGIN_NAME)
+
+        val settingsFormBuilder: FormBuilder = gen.getSettingsFormBuilder()
+        val settingsForm: Form = settingsFormBuilder.run()
+
+        // Tell Burp we want a right mouse click context menu for accessing the settings
+        api.userInterface().registerContextMenuItemsProvider(ExtensionSettingsContextMenuProvider(api, settingsForm))
+
+        // When we unload this extension, include a callback that closes any Swing UI forms instead of just leaving them still open
+        api.extension().registerUnloadingHandler(ExtensionSettingsUnloadHandler(settingsForm))
+
+        ...
+    }
+
+    ...
+    
+    private fun handleInteraction(interaction: Interaction) {
+        api.logging().logToOutput("Made it in here")
+        if (collabFlagItemRegex.currentValue.isNotBlank() &&
+            interaction.type() == InteractionType.HTTP &&
+            interaction.httpDetails().isPresent
+        ) {
+
+            val request = interaction.httpDetails().get().requestResponse().request()
+            // do something with the request here
+            }
+
+        }
+    }
+}
+```
