@@ -30,7 +30,7 @@ public fun HttpRequest.withUpdatedParsedParameterValue(parsedParameter : ParsedH
         when (payloadUpdateMode) {
             PayloadUpdateMode.PREPEND -> {
                 val part1 = requestAsString.substring(0, updatedParsedParam.valueOffsets().startIndexInclusive())
-                val part2 = requestAsString.substring(updatedParsedParam.valueOffsets().startIndexInclusive() + 1)
+                val part2 = requestAsString.substring(updatedParsedParam.valueOffsets().startIndexInclusive())
                 return HttpRequest.httpRequest(this.httpService(), part1 + encodedValue + part2)
             }
 
@@ -44,12 +44,12 @@ public fun HttpRequest.withUpdatedParsedParameterValue(parsedParameter : ParsedH
                         updatedParsedParam.valueOffsets().startIndexInclusive() + middleIndexDiff
                     )
                     val part2 = requestAsString.substring(
-                        updatedParsedParam.valueOffsets().startIndexInclusive() + middleIndexDiff + 1
+                        updatedParsedParam.valueOffsets().startIndexInclusive() + middleIndexDiff
                     )
                     return HttpRequest.httpRequest(this.httpService(), part1 + encodedValue + part2)
                 }
                 val part1 = requestAsString.substring(0, updatedParsedParam.valueOffsets().startIndexInclusive())
-                val part2 = requestAsString.substring(updatedParsedParam.valueOffsets().startIndexInclusive() + 1)
+                val part2 = requestAsString.substring(updatedParsedParam.valueOffsets().startIndexInclusive())
                 return HttpRequest.httpRequest(this.httpService(), part1 + encodedValue + part2)
             }
 
@@ -59,6 +59,7 @@ public fun HttpRequest.withUpdatedParsedParameterValue(parsedParameter : ParsedH
                 return HttpRequest.httpRequest(this.httpService(), part1 + encodedValue + part2)
             }
 
+            //REPLACE
             else -> {
                 val part1 = requestAsString.substring(0, updatedParsedParam.valueOffsets().startIndexInclusive())
                 val part2 = requestAsString.substring(updatedParsedParam.valueOffsets().endIndexExclusive())

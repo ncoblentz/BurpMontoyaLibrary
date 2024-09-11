@@ -203,9 +203,9 @@ class KotlinBurpCollabHelper : BurpExtension {
         val collabFilter = CollabHelperInteractionFilter()
             .withInteractionType(InteractionType.HTTP)
             .withHttpRequestPattern("myregexsearchvaluehere") // Consider using a setting that can be updated from the UI like in the example KotlinBurpCollabHelper.kt file
-            .withInteractionHandler(::handleInteraction)
+            .withInteractionHandler(::handleInteraction) // You must include this part, otherwise it won't call a callback. Point it at the handler inside of your own extension
         
-        // Register the callback with collabHelper
+        // Register the Filter's callback with collabHelper. It will then call your callback above
         collabHelper.interactionObservers.add(collabFilter::handleInteraction)
         
         val extensionSetting = mutableListOf(.. your settings here ...)
