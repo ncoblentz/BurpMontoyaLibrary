@@ -27,7 +27,7 @@ repositories {
 //add the following dependencies
 dependencies {
     //other dependencies here
-    implementation("com.github.ncoblentz:BurpMontoyaLibrary:0.1.12")
+    implementation("com.github.ncoblentz:BurpMontoyaLibrary:0.1.27")
     implementation("com.github.milchreis:uibooster:1.21.1")
 }
 ```
