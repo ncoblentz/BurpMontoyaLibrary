@@ -1,11 +1,8 @@
 package com.nickcoblentz.montoya;
 
 
-import com.nickcoblentz.montoya.ui.UIHelper;
-import de.milchreis.uibooster.UiBooster;
 import java.io.File;
 
-import java.util.concurrent.atomic.AtomicReference;
 
 public class TestDialogs {
     public static void main(String[] args)
@@ -32,7 +29,7 @@ public class TestDialogs {
         */
 
 
-        File[] result = (new UIHelper()).showFileMultiSelectionDialog();
+        //File[] result = (new UIHelper()).showFileMultiSelectionDialog();
 
 
 
